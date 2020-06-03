@@ -20,7 +20,7 @@ namespace ITGame
 
             Room mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
 
-            Console.WriteLine("Welcome to It Simulator. What's your name?");
+            Console.WriteLine("Welcome to ITTTTTT Simulator. What's your name?");
             string playerName;
             playerName = Console.ReadLine();
 
@@ -36,6 +36,9 @@ namespace ITGame
         {
             while (running)
             {
+
+                Room westRoom = new Room("west");
+
                 Console.WriteLine($"You are currently in the {player.getCurrentRoom().name} room. What do you want to do?");
 
                 string playerChoice = Console.ReadLine();
@@ -48,6 +51,24 @@ namespace ITGame
                     case "dev":
                         player.getCurrentRoom().printDebug();
                         break;
+                    case "exit":
+                        running = false;
+                        break;
+                    case "left":
+                        player.setCurrentRoom(westRoom);
+                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
+                        break;
+                    case "right":
+                        Console.WriteLine("You go right");
+                        break;
+                    case "up":
+                    case "straight":
+                        Console.WriteLine("You straight");
+                        break;
+                    case "down":
+                        Console.WriteLine("You go down");
+                        break;
+
                     default:
                         break;
                 }
