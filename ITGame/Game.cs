@@ -27,11 +27,9 @@ namespace ITGame
             player = new Player();
             player.setName(playerName);
             player.setCurrentRoom(mainRoom);
+            
 
-            player.getCurrentRoom().printDebug();
-
-            Console.WriteLine($"Hello {playerName} Welcome to It Simulator");
-            Console.ReadLine();
+            Console.WriteLine($"Hello {playerName}. You look fresh.");
         }
 
         public void start()
@@ -42,35 +40,18 @@ namespace ITGame
 
                 string playerChoice = Console.ReadLine();
 
-                if (playerChoice.Equals("look"))
+                switch (playerChoice)
                 {
-                    player.lookAround();
+                    case "look":
+                        player.lookAround();
+                        break;
+                    case "dev":
+                        player.getCurrentRoom().printDebug();
+                        break;
+                    default:
+                        break;
                 }
-
-                //while (!(playerChoice.Equals("left") || playerChoice.Equals("right") || playerChoice.Equals("straight")))
-                //{
-                //    Console.WriteLine("Please type 'left', 'right' or 'straight'");
-                //    playerChoice = Console.ReadLine();
-                //}
-
-                //if (playerChoice == "left")
-                //{
-                //    Console.WriteLine("Okay, you are in the left room");
-                //    Console.ReadLine();
-                //}
-                //else if (playerChoice == "right")
-                //{
-                //    Console.WriteLine("Okay, you are in the right room");
-                //    Console.ReadLine();
-                //}
-                //else if (playerChoice == "straight")
-                //{
-                //    Console.WriteLine("Okay, you straight");
-                //    Console.ReadLine();
-                //}
-
-                //Console.WriteLine($"You head {playerChoice} ");
-                //Console.ReadLine();
+                
             }
         }
 
