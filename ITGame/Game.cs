@@ -11,14 +11,27 @@ namespace ITGame
         private bool running = true;
         private Player player;
 
+        private Room mainRoom;
+        private Room eastRoom;
+        private Room westRoom;
+        private Room northRoom;
+        private Room southRoom;
+
+
         public void initialize()
         {
-            Room northRoom = new Room("north");
-            Room eastRoom = new Room("east");
-            Room westRoom = new Room("west");
-            Room southRoom = null;
+             northRoom = new Room("north");
+             eastRoom = new Room("east");
+             westRoom = new Room("west");
+            southRoom = null;
+            
 
-            Room mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
+            mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
+            northRoom.setSouth(mainRoom);
+            eastRoom.setWest(mainRoom);
+            westRoom.setEast(mainRoom);
+
+
 
             Console.WriteLine("Welcome to ITTTTTT Simulator. What's your name?");
             string playerName;
@@ -36,9 +49,8 @@ namespace ITGame
         {
             while (running)
             {
-
-                Room westRoom = new Room("west");
-
+                
+           
                 Console.WriteLine($"You are currently in the {player.getCurrentRoom().name} room. What do you want to do?");
 
                 string playerChoice = Console.ReadLine();
@@ -55,18 +67,21 @@ namespace ITGame
                         running = false;
                         break;
                     case "left":
-                        player.setCurrentRoom(westRoom);
+                        player.setCurrentRoom(player.getCurrentRoom().getWest());
                         Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
                         break;
                     case "right":
-                        Console.WriteLine("You go right");
+                        player.setCurrentRoom(player.getCurrentRoom().getEast());
+                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
                         break;
                     case "up":
                     case "straight":
-                        Console.WriteLine("You straight");
+                        player.setCurrentRoom(player.getCurrentRoom().getNorth());
+                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
                         break;
                     case "down":
-                        Console.WriteLine("You go down");
+                        player.setCurrentRoom(player.getCurrentRoom().getSouth());
+                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
                         break;
 
                     default:

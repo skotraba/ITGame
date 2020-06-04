@@ -53,6 +53,26 @@ namespace ITGame
             this.south = southRoom;
         }
 
+        public Room getNorth()
+        {
+            return north;
+        }
+
+        public Room getSouth()
+        {
+            return south;
+        }
+
+        public Room getEast()
+        {
+            return east;
+        }
+
+        public Room getWest()
+        {
+            return west;
+        }
+
         public void description()
         {
             if (this.north != null)
@@ -96,5 +116,8 @@ namespace ITGame
             }
         }
 
+        
+        }
     }
-}
+    
+
