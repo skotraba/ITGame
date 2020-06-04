@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Need a locked door function
+//Problems for each room
+//Randomize output for certain things
+
+
 namespace ITGame
 {
     class Game
@@ -51,10 +56,10 @@ namespace ITGame
             {
                 
            
-                Console.WriteLine($"You are currently in the {player.getCurrentRoom().name} room. What do you want to do?");
+                Console.WriteLine($"What do you want to do?");
 
                 string playerChoice = Console.ReadLine();
-
+                Room curRoom = player.getCurrentRoom();
                 switch (playerChoice)
                 {
                     case "look":
@@ -67,28 +72,78 @@ namespace ITGame
                         running = false;
                         break;
                     case "left":
-                        player.setCurrentRoom(player.getCurrentRoom().getWest());
-                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
+                        if(curRoom.getWest() != null)
+                        {
+                            player.setCurrentRoom(curRoom.getWest());
+                            Console.WriteLine($"You head towards the {player.getCurrentRoom().getName()}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can't go that way. There is no room.");
+                        }
                         break;
                     case "right":
-                        player.setCurrentRoom(player.getCurrentRoom().getEast());
-                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
+                        if (curRoom.getEast() != null)
+                        {
+                            player.setCurrentRoom(curRoom.getEast());
+                            Console.WriteLine($"You head towards the {player.getCurrentRoom().getName()}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can't go that way. There is no room.");
+                        }
                         break;
                     case "up":
                     case "straight":
-                        player.setCurrentRoom(player.getCurrentRoom().getNorth());
-                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
+                        if (curRoom.getNorth() != null)
+                        {
+                            player.setCurrentRoom(curRoom.getNorth());
+                            Console.WriteLine($"You head towards the North");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can't go that way. There is no room.");
+                        }
                         break;
                     case "down":
-                        player.setCurrentRoom(player.getCurrentRoom().getSouth());
-                        Console.WriteLine($"You head towards the {player.getCurrentRoom().name}");
+                        if (curRoom.getSouth() != null)
+                        {
+                            player.setCurrentRoom(curRoom.getSouth());
+                            Console.WriteLine($"You head towards the {player.getCurrentRoom().getName()}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can't go that way. There is no room.");
+                        }
                         break;
-
+                    case "help":
+                        readFile("Verbs");
+                        break;
+                    case "yell":
+                        Console.WriteLine("Why are you yelling?");
+                        break;
                     default:
                         break;
                 }
                 
             }
+
+        }
+
+
+        public void readFile(string fileName)
+        {
+            int counter = 0;
+            string line;
+
+            //Read file and display line by line
+            System.IO.StreamReader file = new System.IO.StreamReader($"../../{fileName}.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                System.Console.WriteLine(line);
+                counter++;
+            }
+            file.Close();
         }
 
     }

@@ -8,11 +8,11 @@ namespace ITGame
 {
     class Room
     {
-        public string name;
-        public Room north;
-        public Room east;
-        public Room south;
-        public Room west;
+        private string name;
+        private Room north;
+        private Room east;
+        private Room south;
+        private Room west;
 
         //Room constructor, each room has a direction that can be null or point to another room
         public Room(string name)
@@ -31,6 +31,11 @@ namespace ITGame
             this.east = eastRoom;
             this.west = westRoom;
             this.south = southRoom;
+        }
+
+        public string getName()
+        {
+            return this.name;
         }
 
         public void setNorth(Room northRoom)
@@ -77,19 +82,19 @@ namespace ITGame
         {
             if (this.north != null)
             {
-                Console.WriteLine($"There is a door that leads to the {this.north.name}");
+                Console.WriteLine($"There is a door to the north");
             }
             if (this.east != null)
             {
-                Console.WriteLine($"There is a door that leads to the {this.east.name}");
+                Console.WriteLine($"There is a door to the east");
             }
             if (this.west != null)
             {
-                Console.WriteLine($"There is a door that leads to the {this.west.name}");
+                Console.WriteLine($"There is a door to the west");
             }
             if (this.south != null)
             {
-                Console.WriteLine($"There is a door that leads to the {this.south.name}");
+                Console.WriteLine($"There is a door to the south");
             }
         }
 
