@@ -9,14 +9,50 @@ namespace ITGame
     class Map
     {
 
+        private Room mainRoom;
+        private Room eastRoom;
+        private Room westRoom;
+        private Room northRoom;
+        private Room southRoom;
+
         public Map()
         {
-            Room mainRoom = new Room("Main");
-            Room westRoom = new Room("West");
-            Room eastRoom = new Room("East");
-            Room southRoom = new Room("South");
+            northRoom = new Room("north");
+            eastRoom = new Room("east");
+            westRoom = new Room("west");
+            southRoom = null;
 
-            
+
+            mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
+            northRoom.setSouth(mainRoom);
+            eastRoom.setWest(mainRoom);
+            westRoom.setEast(mainRoom);
+
+        }
+
+        public Room getMainRoom()
+        {
+            return mainRoom; 
+        }
+
+        public Room getEastRoom()
+        {
+            return eastRoom;
+        }
+
+        public Room getWestRoom()
+        {
+            return westRoom;
+        }
+
+        public Room getSouthRoom()
+        {
+            return southRoom;
+        }
+
+        public Room getNorthRoom()
+        {
+            return northRoom;
         }
 
 

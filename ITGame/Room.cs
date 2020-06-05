@@ -9,6 +9,7 @@ namespace ITGame
     class Room
     {
         private string name;
+        private PC roomPC;
         private Room north;
         private Room east;
         private Room south;
@@ -31,6 +32,16 @@ namespace ITGame
             this.east = eastRoom;
             this.west = westRoom;
             this.south = southRoom;
+        }
+
+        public Room(string name, Room northRoom, Room eastRoom, Room westRoom, Room southRoom, PC problemPC)
+        {
+            this.name = name;
+            this.north = northRoom;
+            this.east = eastRoom;
+            this.west = westRoom;
+            this.south = southRoom;
+            this.roomPC = problemPC;
         }
 
         public string getName()

@@ -16,26 +16,13 @@ namespace ITGame
         private bool running = true;
         private Player player;
 
-        private Room mainRoom;
-        private Room eastRoom;
-        private Room westRoom;
-        private Room northRoom;
-        private Room southRoom;
+        
 
 
         public void initialize()
         {
-             northRoom = new Room("north");
-             eastRoom = new Room("east");
-             westRoom = new Room("west");
-            southRoom = null;
-            
 
-            mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
-            northRoom.setSouth(mainRoom);
-            eastRoom.setWest(mainRoom);
-            westRoom.setEast(mainRoom);
-
+            Map map = new Map();
 
 
             Console.WriteLine("Welcome to ITTTTTT Simulator. What's your name?");
@@ -44,7 +31,7 @@ namespace ITGame
 
             player = new Player();
             player.setName(playerName);
-            player.setCurrentRoom(mainRoom);
+            player.setCurrentRoom(map.getMainRoom());
             
 
             Console.WriteLine($"Hello {playerName}. You look fresh.");
@@ -71,6 +58,7 @@ namespace ITGame
                     case "exit":
                         running = false;
                         break;
+                    case "west":
                     case "left":
                         if(curRoom.getWest() != null)
                         {
@@ -82,6 +70,7 @@ namespace ITGame
                             Console.WriteLine("You can't go that way. There is no room.");
                         }
                         break;
+                    case "east":
                     case "right":
                         if (curRoom.getEast() != null)
                         {
