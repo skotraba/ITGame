@@ -53,27 +53,27 @@ namespace ITGame
             this.currentRoom.description();
         }
 
-        public void move(string direction)
-        {
-            switch (direction)
-            {
-                case "left":
-                    Console.WriteLine("You go left");
-                    break;
-                case "right":
-                    Console.WriteLine("You go right");
-                    break;
-                case "up":
-                case "straight":
-                    Console.WriteLine("You straight");
-                    break;
-                case "down":
-                    Console.WriteLine("You go down");
-                    break;
-                default:
-                    Console.WriteLine("Not a valid direction");
-                    break;
-            }
-        }
+        //public void move(string direction)
+        //{
+        //    switch (direction)
+        //    {
+        //        case "left":
+        //            Console.WriteLine("You go left");
+        //            break;
+        //        case "right":
+        //            Console.WriteLine("You go right");
+        //            break;
+        //        case "up":
+        //        case "straight":
+        //            Console.WriteLine("You straight");
+        //            break;
+        //        case "down":
+        //            Console.WriteLine("You go down");
+        //            break;
+        //        default:
+        //            Console.WriteLine("Not a valid direction");
+        //            break;
+        //    }
+        //}
     }
 }

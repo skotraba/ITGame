@@ -17,5 +17,10 @@ namespace ITGame
         {
             this.name = name;
         }
+
+        public string getPCName()
+        {
+            return this.name;
+        }
     }
 }

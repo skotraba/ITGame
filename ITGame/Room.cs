@@ -23,6 +23,17 @@ namespace ITGame
             this.east = null;
             this.west = null;
             this.south = null;
+            this.roomPC = null;
+        }
+
+        public Room(string name, PC thisRoomPc)
+        {
+            this.name = name;
+            this.north = null;
+            this.east = null;
+            this.west = null;
+            this.south = null;
+            this.roomPC = thisRoomPc;
         }
 
         public Room(string name, Room northRoom, Room eastRoom, Room westRoom, Room southRoom)
@@ -33,16 +44,7 @@ namespace ITGame
             this.west = westRoom;
             this.south = southRoom;
         }
-
-        public Room(string name, Room northRoom, Room eastRoom, Room westRoom, Room southRoom, PC problemPC)
-        {
-            this.name = name;
-            this.north = northRoom;
-            this.east = eastRoom;
-            this.west = westRoom;
-            this.south = southRoom;
-            this.roomPC = problemPC;
-        }
+        
 
         public string getName()
         {
@@ -107,6 +109,10 @@ namespace ITGame
             {
                 Console.WriteLine($"There is a door to the south");
             }
+            if(this.roomPC != null)
+            {
+                Console.WriteLine($"You see a computer sitting alone in the room");
+            }
         }
 
         // DEBUGGING ONLY. ROCKETS
@@ -132,6 +138,10 @@ namespace ITGame
             }
         }
 
+        public PC getPC()
+        {
+            return this.roomPC;
+        }
         
         }
     }

@@ -15,16 +15,13 @@ namespace ITGame
     {
         private bool running = true;
         private Player player;
-
-        
-
-
+        private Map map;
+       
         public void initialize()
         {
-
-            Map map = new Map();
-
-
+     
+            map = new Map();
+            
             Console.WriteLine("Welcome to ITTTTTT Simulator. What's your name?");
             string playerName;
             playerName = Console.ReadLine();
@@ -100,6 +97,11 @@ namespace ITGame
                             player.setCurrentRoom(curRoom.getSouth());
                             Console.WriteLine($"You head towards the {player.getCurrentRoom().getName()}");
                         }
+                        //This is broken. Need to add field of locked instead of null;
+                        else if (curRoom.getSouth().getName().Equals(map.getSouthRoom().getName()))
+                        {
+                            Console.WriteLine("That door is locked. You cannot leave until you finish all your tasks");
+                        }
                         else
                         {
                             Console.WriteLine("You can't go that way. There is no room.");
@@ -107,6 +109,16 @@ namespace ITGame
                         break;
                     case "help":
                         readFile("Verbs");
+                        break;
+                    case "go to pc":
+                        if(curRoom.getPC() != null)
+                        {
+                            Console.WriteLine("You head towards the computer");
+                        }
+                        else
+                        {
+                            Console.WriteLine("There is no computer in this room");
+                        }
                         break;
                     case "yell":
                         Console.WriteLine("Why are you yelling?");
