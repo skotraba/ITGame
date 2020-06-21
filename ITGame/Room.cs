@@ -14,6 +14,8 @@ namespace ITGame
         private Room east;
         private Room south;
         private Room west;
+        private bool isSolved = false;
+        private bool isLocked;
 
         //Room constructor, each room has a direction that can be null or point to another room
         public Room(string name)
@@ -26,7 +28,7 @@ namespace ITGame
             this.roomPC = null;
         }
 
-        public Room(string name, PC thisRoomPc)
+        public Room(string name, PC thisRoomPc, bool locked)
         {
             this.name = name;
             this.north = null;
@@ -34,6 +36,7 @@ namespace ITGame
             this.west = null;
             this.south = null;
             this.roomPC = thisRoomPc;
+            this.isLocked = locked;
         }
 
         public Room(string name, Room northRoom, Room eastRoom, Room westRoom, Room southRoom)
@@ -118,11 +121,12 @@ namespace ITGame
         // DEBUGGING ONLY. ROCKETS
         public void printDebug()
         {
-            Console.WriteLine($"We are in the {this.name} room");
+            Console.WriteLine($"\nWe are in the {this.name} room");
 
             if (this.north != null)
             {
                 Console.WriteLine($"There is a door that leads to the {this.north.name}");
+                Console.WriteLine($"This North room locked: {this.getNorth().isLocked}");
             }
             if (this.east != null)
             {
@@ -136,14 +140,34 @@ namespace ITGame
             {
                 Console.WriteLine($"There is a door that leads to the {this.south.name}");
             }
+            Console.WriteLine($"This room status: {this.isSolved}");
+            Console.WriteLine($"This room locked: {this.isLocked}");
+            
+
         }
 
         public PC getPC()
         {
             return this.roomPC;
         }
-        
+
+        public bool getRoomSolved()
+        {
+            return this.isSolved;
         }
+
+        public void setRoomSolved()
+        {
+            this.isSolved = true;
+        }
+
+
+        public bool getLocked()
+        {
+            return this.isLocked;
+        }
+
+    }
     }
     
 

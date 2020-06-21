@@ -36,7 +36,7 @@ namespace ITGame
         {
             while (running)
             {
-                Console.WriteLine($"What do you want to do?\n");
+                Console.WriteLine($"What do you want to do?\nYou can type 'help' for a list of what you can do.\n");
 
                 string playerChoice = Console.ReadLine();
                 Room curRoom = player.getCurrentRoom();
@@ -77,10 +77,15 @@ namespace ITGame
                         break;
                     case "up":
                     case "straight":
-                        if (curRoom.getNorth() != null)
+                        //TODO: This breaks when there is not a north room. 
+                        if (curRoom.getNorth() != null && curRoom.getNorth().getLocked() != true)
                         {
                             player.setCurrentRoom(curRoom.getNorth());
                             Console.WriteLine($"You head towards the North");
+                        }
+                        else if(curRoom.getNorth().getLocked() == true)
+                        {
+                            Console.WriteLine("You can't go that way. The door is locked.");
                         }
                         else
                         {
@@ -107,17 +112,21 @@ namespace ITGame
                         readFile("Verbs");
                         break;
                     case "go to pc":
-                        if(curRoom.getPC() != null)
+                        if(curRoom.getPC() != null && curRoom.getRoomSolved() == false)
                         {
                             Console.WriteLine("You head towards the computer");
                             // TODO: this is where you can call the PC's start loop
                             curRoom.getPC().initPCLoopEast();
+                            curRoom.setRoomSolved();
                             // control will be switched to the PC's loop until that loop is finished (the user exits the PC)
                             // curRoom.getPC().start()
                         }
+                        else if (curRoom.getRoomSolved() == false){
+                            Console.WriteLine("There are no computers to fix in this room.");
+                        }
                         else
                         {
-                            Console.WriteLine("There is no computer in this room");
+                            Console.WriteLine("You cannot go to a pc at this time");
                         }
                         break;
                     case "yell":

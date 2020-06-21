@@ -15,16 +15,21 @@ namespace ITGame
         private Room northRoom;
         private Room southRoom;
 
+
         private PC eastRoomPC;
+        private PC westRoomPC;
+        private PC northRoomPC;
 
         public Map()
         {
 
             eastRoomPC = new PC("Power PC");
+            westRoomPC = new PC("Test Pc");
+            northRoomPC = new PC("idk");
 
-            northRoom = new Room("north");
-            eastRoom = new Room("east", eastRoomPC);
-            westRoom = new Room("west");
+            northRoom = new Room("north", northRoomPC, true);
+            eastRoom = new Room("east", eastRoomPC, false);
+            westRoom = new Room("west", westRoomPC, false);
             southRoom = null;
 
 

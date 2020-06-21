@@ -54,6 +54,7 @@ namespace ITGame
                         while (!choice.Equals("y"))
                         {
                             Console.WriteLine("Okay, but the computer should probably be plugged in...");
+                            Console.WriteLine("I'll do it for you. Jeez.");
                             break;
                         }
                         Console.WriteLine("The computer is plugged in. You should try turning it on");
@@ -83,6 +84,8 @@ namespace ITGame
             {
                 Console.WriteLine("Alright, I'll turn it on for you.  Looks like the computer is fixed. Let's move on.");
             }
+
+            
         }
     }
 }
