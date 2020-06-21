@@ -23,14 +23,14 @@ namespace ITGame
         public Map()
         {
 
-            eastRoomPC = new PC("Power PC");
-            westRoomPC = new PC("Test Pc");
-            northRoomPC = new PC("idk");
+            eastRoomPC = new PC("eastRoomPC");
+            westRoomPC = new PC("westRoomPC");
+            northRoomPC = new PC("northRoomPC");
 
             northRoom = new Room("north", northRoomPC, true);
             eastRoom = new Room("east", eastRoomPC, false);
             westRoom = new Room("west", westRoomPC, false);
-            southRoom = null;
+            southRoom = new Room("south", null, true);
 
 
             mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);

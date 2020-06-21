@@ -48,6 +48,7 @@ namespace ITGame
                     case "dev":
                         player.getCurrentRoom().printDebug();
                         break;
+                    case "q":
                     case "exit":
                         running = false;
                         break;
@@ -76,16 +77,18 @@ namespace ITGame
                         }
                         break;
                     case "up":
-                    case "straight":
-                        //TODO: This breaks when there is not a north room. 
-                        if (curRoom.getNorth() != null && curRoom.getNorth().getLocked() != true)
+                    case "straight": 
+                        if(curRoom.getNorth() != null)
                         {
-                            player.setCurrentRoom(curRoom.getNorth());
-                            Console.WriteLine($"You head towards the North");
-                        }
-                        else if(curRoom.getNorth().getLocked() == true)
-                        {
-                            Console.WriteLine("You can't go that way. The door is locked.");
+                            if (!curRoom.getNorth().getLocked())
+                            {
+                                player.setCurrentRoom(curRoom.getNorth());
+                                Console.WriteLine($"You head towards the North");
+                            }
+                            else if (curRoom.getNorth().getLocked())
+                            {
+                                Console.WriteLine("You can't go that way. The door is locked.");
+                            }
                         }
                         else
                         {
@@ -95,31 +98,48 @@ namespace ITGame
                     case "down":
                         if (curRoom.getSouth() != null)
                         {
-                            player.setCurrentRoom(curRoom.getSouth());
-                            Console.WriteLine($"You head towards the {player.getCurrentRoom().getName()}");
-                        }
-                        //This is broken. Need to add field of locked instead of null;
-                        else if (curRoom.getSouth().getName().Equals(map.getSouthRoom().getName()))
-                        {
-                            Console.WriteLine("That door is locked. You cannot leave until you finish all your tasks");
+                            if (!curRoom.getSouth().getLocked())
+                            {
+                                player.setCurrentRoom(curRoom.getSouth());
+                                Console.WriteLine($"You have finished all your tasks.  You leave the building.");
+                            }
+                            else if (curRoom.getSouth().getLocked())
+                            {
+                                Console.WriteLine("You can't go that way. The door is locked.");
+                            }
                         }
                         else
                         {
                             Console.WriteLine("You can't go that way. There is no room.");
                         }
                         break;
+                    case "h":
                     case "help":
                         readFile("Verbs");
                         break;
                     case "go to pc":
                         if(curRoom.getPC() != null && curRoom.getRoomSolved() == false)
                         {
+                            //Add functions for other rooms
                             Console.WriteLine("You head towards the computer");
-                            // TODO: this is where you can call the PC's start loop
-                            curRoom.getPC().initPCLoopEast();
-                            curRoom.setRoomSolved();
-                            // control will be switched to the PC's loop until that loop is finished (the user exits the PC)
-                            // curRoom.getPC().start()
+                            if (curRoom.getPC().getPCName().Equals("eastRoomPC"))
+                            {
+                                curRoom.getPC().initPCLoopEast();
+                                curRoom.setRoomSolved();
+                            }
+                            else if (curRoom.getPC().getPCName().Equals("westRoomPC"))
+                            {
+                                curRoom.getPC().initPCRoomWest();
+                            }
+                            else if (curRoom.getPC().getPCName().Equals("northRoomPC"))
+                            {
+                                curRoom.getPC().initPCRoomNorth();
+                            }
+                            else
+                            {
+                                Console.WriteLine("What Computer are you trying to go to?");
+                            }
+                            
                         }
                         else if (curRoom.getRoomSolved() == false){
                             Console.WriteLine("There are no computers to fix in this room.");
@@ -133,6 +153,8 @@ namespace ITGame
                         Console.WriteLine("Why are you yelling?");
                         break;
                     default:
+                        Console.WriteLine($"The command {playerChoice} was not recognized\n");
+                        Console.WriteLine("Type 'help' or 'h' for a list of commands");
                         break;
                 }
                 

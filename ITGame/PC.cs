@@ -35,8 +35,8 @@ namespace ITGame
         public void initPCLoopEast()
         {
             Console.WriteLine("You are looking at Barb's computer.  \nShe's complaining that it won't turn on.  \nYou look at the computer and the screen is black");
-            Console.WriteLine("You need to troubleshoot the computer to leave the room, what would you like to do?");
-            Console.WriteLine("1. Turn the computer on  \n2. Check if it's plugged in \n3. Turn the computer on and enter BIOS \n4. Smell the Computer \n5.Hit the Computer");
+            Console.WriteLine("You need to troubleshoot the computer to leave the room, what would you like to do?\n");
+            Console.WriteLine("1. Turn the computer on  \n2. Check if it's plugged in \n3. Turn the computer on and enter BIOS \n4. Smell the Computer \n5. Hit the Computer");
             
             
             bool PCPower = false;
@@ -69,6 +69,8 @@ namespace ITGame
                     case "5":
                         Console.WriteLine("Don't be stupid");
                         break;
+                    case "leave":
+                        break;
                     default:
                         Console.WriteLine("The computer is still broken");
                         break;
@@ -86,6 +88,16 @@ namespace ITGame
             }
 
             
+        }
+
+        public void initPCRoomWest()
+        {
+            Console.WriteLine("You intiate the west room PC problem");
+        }
+
+        public void initPCRoomNorth()
+        {
+            Console.WriteLine("You intiate the north room PC problem");
         }
     }
 }
