@@ -19,10 +19,9 @@ namespace ITGame
        
         public void initialize()
         {
-     
             map = new Map();
             
-            Console.WriteLine("Welcome to ITTTTTT Simulator. What's your name?");
+            Console.WriteLine("Welcome to ITTTTTT Simulator.\nWhat's your name?");
             string playerName;
             playerName = Console.ReadLine();
 
@@ -30,17 +29,14 @@ namespace ITGame
             player.setName(playerName);
             player.setCurrentRoom(map.getMainRoom());
             
-
-            Console.WriteLine($"Hello {playerName}. You look fresh.");
+            Console.WriteLine($"Hello {playerName}. You look fresh.\n");
         }
 
         public void start()
         {
             while (running)
             {
-                
-           
-                Console.WriteLine($"What do you want to do?");
+                Console.WriteLine($"What do you want to do?\n");
 
                 string playerChoice = Console.ReadLine();
                 Room curRoom = player.getCurrentRoom();
@@ -114,6 +110,10 @@ namespace ITGame
                         if(curRoom.getPC() != null)
                         {
                             Console.WriteLine("You head towards the computer");
+                            // TODO: this is where you can call the PC's start loop
+                            curRoom.getPC().initPCLoopEast();
+                            // control will be switched to the PC's loop until that loop is finished (the user exits the PC)
+                            // curRoom.getPC().start()
                         }
                         else
                         {

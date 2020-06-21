@@ -1,0 +1,8 @@
+﻿Here is a list of things you can do
+look - Look around the room
+left - Move to the left
+right - Move to the right
+up - Move up
+down - Move down
+yell - You can yell
+exit - Exit the game I guess
