@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO Look up Singleton pattern for this. Private constructor and only one instance. 
+
 namespace ITGame
 {
     class Map
@@ -24,16 +26,16 @@ namespace ITGame
         {
 
             eastRoomPC = new PC("eastRoomPC");
-            westRoomPC = new PC("westRoomPC");
+            westRoomPC = new PC("westRoomPC",50, 100.0, 20);
             northRoomPC = new PC("northRoomPC");
 
             northRoom = new Room("north", northRoomPC, true);
             eastRoom = new Room("east", eastRoomPC, false);
             westRoom = new Room("west", westRoomPC, false);
             southRoom = new Room("south", null, true);
-
-
+            
             mainRoom = new Room("main", northRoom, eastRoom, westRoom, southRoom);
+
             northRoom.setSouth(mainRoom);
             eastRoom.setWest(mainRoom);
             westRoom.setEast(mainRoom);

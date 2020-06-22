@@ -124,8 +124,15 @@ namespace ITGame
                             Console.WriteLine("You head towards the computer");
                             if (curRoom.getPC().getPCName().Equals("eastRoomPC"))
                             {
-                                curRoom.getPC().initPCLoopEast();
-                                curRoom.setRoomSolved();
+                                if (curRoom.getPC().initPCLoopEast())
+                                {
+                                    curRoom.setRoomSolved();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                                
                             }
                             else if (curRoom.getPC().getPCName().Equals("westRoomPC"))
                             {
