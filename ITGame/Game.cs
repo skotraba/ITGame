@@ -33,9 +33,14 @@ namespace ITGame
         }
 
         public void start()
+
         {
+
+            int count = 0;
             while (running)
             {
+               
+
                 Console.WriteLine($"What do you want to do?\nYou can type 'help' for a list of what you can do.\n");
 
                 string playerChoice = Console.ReadLine();
@@ -176,7 +181,17 @@ namespace ITGame
                         Console.WriteLine("Type 'help' or 'h' for a list of commands");
                         break;
                 }
-                
+                bool solvedEW = map.checkMap();
+                if (solvedEW && count < 1)
+                {
+                    count++;
+                    map.getNorthRoom().unlockRoom();
+                    Console.WriteLine("You can somehow hear that the North Room is unlocked.  Complete this room to leave the building.");
+                }
+                else
+                {
+                    continue;
+                }
             }
 
         }

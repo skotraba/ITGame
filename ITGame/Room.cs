@@ -167,6 +167,11 @@ namespace ITGame
             return this.isLocked;
         }
 
+        public void unlockRoom()
+        {
+            this.isLocked = false;
+        }
+
     }
     }
     

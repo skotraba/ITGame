@@ -89,6 +89,8 @@ namespace ITGame
                         break;
                     case "6":
                         return false;
+                    case "fix":
+                        return true;
                     default:
                         Console.WriteLine("The computer is still broken");
                         break;

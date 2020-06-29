@@ -67,6 +67,19 @@ namespace ITGame
             return northRoom;
         }
 
+        
+        //Check the state of the Map to unlock North Room
+        public bool checkMap()
+        {
+            if (eastRoom.getRoomSolved() && westRoom.getRoomSolved() == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
