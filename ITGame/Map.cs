@@ -26,8 +26,8 @@ namespace ITGame
         {
 
             eastRoomPC = new PC("eastRoomPC");
-            westRoomPC = new PC("westRoomPC", 50, 20);
-            northRoomPC = new PC("northRoomPC");
+            westRoomPC = new PC("westRoomPC", 50, "Chrome", 20, false, false, false);
+            northRoomPC = new PC("northRoomPC", 100, "Stacked OverFlow", 10, false, false, false);
 
             northRoom = new Room("north", northRoomPC, true);
             eastRoom = new Room("east", eastRoomPC, false);

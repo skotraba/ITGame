@@ -15,8 +15,12 @@ namespace ITGame
     {
         private string name;
         private int process;
+        private string processName;
         private double performance;
         private int startUp;
+        private bool VSCode;
+        private bool typeScript;
+        private bool npm;
 
         public PC(string name)
         {
@@ -28,6 +32,18 @@ namespace ITGame
             this.name = name;
             this.process = process;
             this.startUp = startUp;
+        }
+
+        public PC(string name, int process, string processName, int startUp, bool VSCode, bool typeScript, bool npm)
+        {
+            this.name = name;
+            this.process = process;
+            this.startUp = startUp;
+            this.processName = processName;
+            this.VSCode = VSCode;
+            this.typeScript = typeScript;
+            this.npm = npm;
+
         }
 
         public string getPCName()
@@ -205,7 +221,7 @@ namespace ITGame
                 switch (playerChoice)
                 {
                     case "1":
-                        Console.WriteLine($"You check the processes running and see {this.process} chrome tabs are open.\n");
+                        Console.WriteLine($"You check the processes running and see {this.process} {this.processName} tabs are open.\n");
                         printTaskMenu();
                         break;
                     case "2":
@@ -248,9 +264,65 @@ namespace ITGame
             
         }
 
-        public void initPCRoomNorth()
+        //North Room Final PC problem
+        public bool initPCRoomNorth()
         {
-            Console.WriteLine("You intiate the north room PC problem");
+            Console.WriteLine("You intiate the north room PC problem\n\n");
+            bool isFixed = false;
+            Console.WriteLine("You approach the final computer in the game.  Unlike any problem you have seen before.");
+            Console.WriteLine("Fix this issue and you can go home and eat pizza.\n");
+            Console.WriteLine("The computer belongs to Steven. A self proclaimed developer.  He needs you to do everything for him so he can maybe do his job.\n");
+            Console.WriteLine("At first glance, you see dandruff all over the PC.\n");
+            Console.WriteLine("Set up his computer and get out of here.\n");
+
+            while (!isFixed)
+            {
+                printNorthMenu();
+                string choice = Console.ReadLine();
+                switch(choice)
+                {
+                    case "1":
+                        this.taskChecker();
+                        break;
+                    case "2":
+                        Console.WriteLine("You begin to install VSCode. Real glad you work in IT right now?");
+                        this.installVSCode();
+                        break;
+                    case "3":
+                        Console.WriteLine("You install TypeScript");
+                        this.installTypeScript();
+                        break;
+                    case "4":
+                        Console.WriteLine("You go ahead and install npm for the royal highness");
+                        this.installNPM();
+                        break;
+                    case "5":
+                        Console.WriteLine("His code is garbage");
+                        break;
+                    case "6":
+                        Console.WriteLine("You leave the computer");
+                        return false;
+                    case "7":
+                        Console.WriteLine("Checking that everything is installed...");
+                        Console.WriteLine($"VSCode... {this.VSCode}\n");
+                        Console.WriteLine($"TypeScript... {this.typeScript}\n");
+                        Console.WriteLine($"NPM... {this.npm}\n");
+                        isFixed = this.checkInstalls();
+                        if (isFixed)
+                        {
+                            Console.WriteLine("Looks like everything is installed.  Good job.");
+                            return true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    default:
+                        break;
+                }
+            }
+            return true;
+           
         }
 
         public void printMenuWest()
@@ -273,9 +345,57 @@ namespace ITGame
             Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n");
         }
 
+        public void printNorthMenu()
+        {
+            Console.WriteLine("\nYou can:\n1.Check Task Manager \n2.Install VSCode \n3.Install TypeScript \n4.Install npm \n5.Sneak a look at his code \n6.Leave this computer \n7.Check Installs");
+        }
+
         public double checkPerform()
         {
             return this.performance = (this.process + this.startUp) + 10;
+        }
+
+        //Getters and Setters for installs
+        public bool getVSCode()
+        {
+            return this.VSCode;
+        }
+
+        public bool getTypeScript()
+        {
+            return this.typeScript;
+        }
+
+        public bool getNPM()
+        {
+            return this.npm;
+        }
+
+        public void installVSCode()
+        {
+            this.VSCode = true;
+        }
+
+        public void installTypeScript()
+        {
+            this.typeScript = true;
+        }
+
+        public void installNPM()
+        {
+            this.npm = true;
+        }
+
+        public bool checkInstalls()
+        {
+            if(this.getNPM() == true && this.getTypeScript() == true && this.getVSCode() == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

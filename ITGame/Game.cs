@@ -176,6 +176,10 @@ namespace ITGame
                     case "yell":
                         Console.WriteLine("Why are you yelling?");
                         break;
+                    case "fix":
+                        map.getNorthRoom().unlockRoom();
+                        Console.WriteLine("North Unlocked");
+                        break;
                     default:
                         Console.WriteLine($"The command {playerChoice} was not recognized\n");
                         Console.WriteLine("Type 'help' or 'h' for a list of commands");
