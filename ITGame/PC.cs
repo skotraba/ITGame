@@ -112,13 +112,25 @@ namespace ITGame
         //West Room PC Problem. Slow Computer
         public bool initPCRoomWest()
         {
-            Console.WriteLine("You approach Carol's computer and she says it is running slow lately.\n");
-            Console.WriteLine("You need to troubleshoot the computer before you can leave the building.\n");
-            printMenuWest();
 
-            bool isFixed = false;
+            bool isFixed = true;
+            
+          
+            
             while (!isFixed)
             {
+                double currentCPU = checkPerform();
+                if (currentCPU <= 10)
+                {
+                    isFixed = true;
+                }
+                else
+                {
+                    isFixed = false;
+                    Console.WriteLine("You approach Carol's computer and she says it is running slow lately.\n");
+                    Console.WriteLine("You need to troubleshoot the computer before you can leave the building.\n");
+                    printMenuWest();
+                }
                 string playerChoice = Console.ReadLine();
                 switch (playerChoice)
                 {
@@ -147,6 +159,11 @@ namespace ITGame
                         break;
                     case "4":
                         return false;
+                    //Debug only
+                    case "fix":
+                        this.process = 10;
+                        Console.WriteLine($"Process is {this.process}");
+                        return true;
                     default:
                         Console.WriteLine("Please try something else");
                         printMenuWest();
@@ -167,9 +184,9 @@ namespace ITGame
         {
             Console.WriteLine("The task manager loads. What do you want to check?\n");
             printTaskMenu();
-            bool isChecking = false;
+            bool isChecking = true;
 
-            while (!isChecking)
+            while (isChecking)
             {
                 string playerChoice = Console.ReadLine();
                 switch (playerChoice)
@@ -184,11 +201,46 @@ namespace ITGame
                         break;
                     case "3":
                         Console.WriteLine($"There are {this.startUp} programs enabled on start up\n");
+
+                        if(this.startUp > 0)
+                        {
+                            Console.WriteLine("Do you want to disable start up processes?");
+                            string choice = Console.ReadLine();
+                            if (choice == "y")
+                            {
+                                Console.WriteLine("You cleared the start up apps. Good job.");
+                                this.startUp = 0;
+                            }
+                            else if (choice == "n")
+                            {
+                                Console.WriteLine("You might want to try clearing the start up apps...");
+                               
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter a 'y' or 'n' \n");
+                            }
+                        }
+                        
                         printTaskMenu();
                         break;
                     case "4":
                         Console.WriteLine("You quit the task manager");
-                        isChecking = true;
+                        isChecking = false;
+                        break;
+                    case "5":
+                        Console.WriteLine($"The computer CPU is running at {this.process}%");
+                        if (this.process <= 10)
+                        {
+                            Console.WriteLine("Good job.  The computer seems to be running more effectively.  Let's leave this room.");
+                            isChecking = false;
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("You should try so more troubleshooting things...It's still real slow. ");
+                            printTaskMenu();
+                        }
                         break;
                     default:
                         break;
@@ -213,8 +265,8 @@ namespace ITGame
 
         public void printTaskMenu()
         {
-            
-            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n");
+
+            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n5.Check overall speed \n");
         }
 
         public double checkPerform()
