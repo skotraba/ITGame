@@ -136,7 +136,19 @@ namespace ITGame
                             }
                             else if (curRoom.getPC().getPCName().Equals("westRoomPC"))
                             {
-                                curRoom.getPC().initPCRoomWest();
+                                
+                                if (curRoom.getPC().getPCName().Equals("westRoomPC"))
+                                {
+                                    if (curRoom.getPC().initPCRoomWest())
+                                    {
+                                        curRoom.setRoomSolved();
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+
+                                }
                             }
                             else if (curRoom.getPC().getPCName().Equals("northRoomPC"))
                             {

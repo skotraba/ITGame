@@ -112,31 +112,21 @@ namespace ITGame
         //West Room PC Problem. Slow Computer
         public bool initPCRoomWest()
         {
+            Console.WriteLine("You approach Carol's computer and she says it is running slow lately.\n");
+            Console.WriteLine("You need to troubleshoot the computer before you can leave the building.\n");
+            printMenuWest();
 
-            bool isFixed = true;
-            
-          
+            bool isFixed = false;
             
             while (!isFixed)
             {
-                double currentCPU = checkPerform();
-                if (currentCPU <= 10)
-                {
-                    isFixed = true;
-                }
-                else
-                {
-                    isFixed = false;
-                    Console.WriteLine("You approach Carol's computer and she says it is running slow lately.\n");
-                    Console.WriteLine("You need to troubleshoot the computer before you can leave the building.\n");
-                    printMenuWest();
-                }
+             
                 string playerChoice = Console.ReadLine();
                 switch (playerChoice)
                 {
                     case "1":
                         Console.WriteLine("The computer restarts.\n");
-                        this.process = 0;
+                        this.process = 10;
                         printMenuWest();
                         break;
                     case "2":
@@ -153,7 +143,7 @@ namespace ITGame
                         }
                         System.Threading.Thread.Sleep(2000);
                         Console.WriteLine("The Computer restarted");
-                        this.process = 0;
+                        this.process = 10;
                         this.checkPerform();
                         printMenuWest();
                         break;
@@ -164,20 +154,41 @@ namespace ITGame
                         this.process = 10;
                         Console.WriteLine($"Process is {this.process}");
                         return true;
+                    case "5":
+                        Console.WriteLine($"The computer CPU is running at {this.process}%");
+                        if (this.process <= 20)
+                        {
+                            Console.WriteLine("Good job.  The computer seems to be running more effectively.  Let's leave this room.");
+                            isFixed = true;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("You should try so more troubleshooting things...It's still real slow. ");
+                            printTaskMenu();
+                        }
+                        break;
                     default:
                         Console.WriteLine("Please try something else");
                         printMenuWest();
                         break;
                 }
+               
             }
-            Console.WriteLine("The computer seems to be running faster. Good job.  Leave this room.\n");
-            return true;
+            double currentCPU = checkPerform();
+            if (currentCPU <= 20)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+               
+            }
+
         }
 
-        public void initPCRoomNorth()
-        {
-            Console.WriteLine("You intiate the north room PC problem");
-        }
+       
 
         //Task Manager
         public void taskChecker()
@@ -228,20 +239,6 @@ namespace ITGame
                         Console.WriteLine("You quit the task manager");
                         isChecking = false;
                         break;
-                    case "5":
-                        Console.WriteLine($"The computer CPU is running at {this.process}%");
-                        if (this.process <= 10)
-                        {
-                            Console.WriteLine("Good job.  The computer seems to be running more effectively.  Let's leave this room.");
-                            isChecking = false;
-                            
-                        }
-                        else
-                        {
-                            Console.WriteLine("You should try so more troubleshooting things...It's still real slow. ");
-                            printTaskMenu();
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -249,10 +246,15 @@ namespace ITGame
             
         }
 
+        public void initPCRoomNorth()
+        {
+            Console.WriteLine("You intiate the north room PC problem");
+        }
+
         public void printMenuWest()
         {
             
-            Console.WriteLine("You can:\n1.Restart the computer \n2.Check Task Manager \n3.Pull the plug \n4.Leave\n");
+            Console.WriteLine("You can:\n1.Restart the computer \n2.Check Task Manager \n3.Pull the plug \n4.Leave \n5.Check overall speed \n");
         }
 
         public void printMenuEast()
@@ -266,7 +268,7 @@ namespace ITGame
         public void printTaskMenu()
         {
 
-            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n5.Check overall speed \n");
+            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n");
         }
 
         public double checkPerform()
