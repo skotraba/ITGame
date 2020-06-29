@@ -23,11 +23,10 @@ namespace ITGame
             this.name = name;
         }
 
-        public PC(string name, int process, double performance, int startUp)
+        public PC(string name, int process, int startUp)
         {
             this.name = name;
             this.process = process;
-            this.performance = performance;
             this.startUp = startUp;
         }
 
@@ -52,21 +51,20 @@ namespace ITGame
             this.startUp = 0;
         }
 
+        //East Room Computer Power Problem
         public bool initPCLoopEast()
         {
             Console.WriteLine("You are looking at Barb's computer.  \nShe's complaining that it won't turn on.  \nYou look at the computer and the screen is black");
-            Console.WriteLine("You need to troubleshoot the computer to leave the room, what would you like to do?\n");
-            Console.WriteLine("1. Turn the computer on  \n2. Check if it's plugged in \n3. Turn the computer on and enter BIOS \n4. Smell the Computer \n5. Hit the Computer \n6. Leave Computer");
-            
-            
+            Console.WriteLine("You need to troubleshoot the computer to leave the room\n");
             bool PCPower = false;
             while (!PCPower)
             {
+                printMenuEast();
                 String userChoice = Console.ReadLine();
                 switch (userChoice)
                 {
                     case "1":
-                        Console.WriteLine("Nothing happens, it's like there's no power or something.");
+                        Console.WriteLine("Nothing happens, it's like there's no power or something.\n");
                         break;
                     case "2":
                         Console.WriteLine("The computer was not plugged in. Do you want to plug it in? y/n");
@@ -111,11 +109,12 @@ namespace ITGame
             
         }
 
+        //West Room PC Problem. Slow Computer
         public bool initPCRoomWest()
         {
             Console.WriteLine("You approach Carol's computer and she says it is running slow lately.\n");
-            Console.WriteLine("You need to troubleshoot the computer before you can leave the building.");
-            Console.WriteLine("You can:\n1.Restart the computer \n2.Check Task Manager \n3.Pull the plug \n4.Leave");
+            Console.WriteLine("You need to troubleshoot the computer before you can leave the building.\n");
+            printMenuWest();
 
             bool isFixed = false;
             while (!isFixed)
@@ -124,22 +123,37 @@ namespace ITGame
                 switch (playerChoice)
                 {
                     case "1":
-                        Console.WriteLine("The computer restarts.");
+                        Console.WriteLine("The computer restarts.\n");
                         this.process = 0;
+                        printMenuWest();
                         break;
                     case "2":
                         this.taskChecker();
+                        printMenuWest();
                         break;
                     case "3":
+                        Console.WriteLine("Great. Now I'll plug it in and you have to wait for it to restart.\n");
+                        for(int i=1; i < 6; i++)
+                        {
+                            System.Threading.Thread.Sleep(1000);
+                            Console.WriteLine(i);
+                            System.Threading.Thread.Sleep(1000);
+                        }
+                        System.Threading.Thread.Sleep(2000);
+                        Console.WriteLine("The Computer restarted");
+                        this.process = 0;
+                        this.checkPerform();
+                        printMenuWest();
                         break;
                     case "4":
                         return false;
                     default:
                         Console.WriteLine("Please try something else");
+                        printMenuWest();
                         break;
                 }
             }
-            Console.WriteLine("The computer seems to be running faster. Good job.  Leave this room.");
+            Console.WriteLine("The computer seems to be running faster. Good job.  Leave this room.\n");
             return true;
         }
 
@@ -148,14 +162,11 @@ namespace ITGame
             Console.WriteLine("You intiate the north room PC problem");
         }
 
+        //Task Manager
         public void taskChecker()
         {
-            
-
             Console.WriteLine("The task manager loads. What do you want to check?\n");
-            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n");
-            
-
+            printTaskMenu();
             bool isChecking = false;
 
             while (!isChecking)
@@ -165,12 +176,15 @@ namespace ITGame
                 {
                     case "1":
                         Console.WriteLine($"You check the processes running and see {this.process} chrome tabs are open.\n");
+                        printTaskMenu();
                         break;
                     case "2":
-                        Console.WriteLine($"The CPU performance is running at {this.performance}%\n");
+                        Console.WriteLine($"The CPU performance is running at {checkPerform()}%\n");
+                        printTaskMenu();
                         break;
                     case "3":
-                        Console.WriteLine($"There are {this.performance} programs enabled on start up");
+                        Console.WriteLine($"There are {this.startUp} programs enabled on start up\n");
+                        printTaskMenu();
                         break;
                     case "4":
                         Console.WriteLine("You quit the task manager");
@@ -180,8 +194,32 @@ namespace ITGame
                         break;
                 }
             }
+            
+        }
 
-           
+        public void printMenuWest()
+        {
+            
+            Console.WriteLine("You can:\n1.Restart the computer \n2.Check Task Manager \n3.Pull the plug \n4.Leave\n");
+        }
+
+        public void printMenuEast()
+        {
+
+            Console.WriteLine("What would you like to do?\n");
+            Console.WriteLine("1. Turn the computer on  \n2. Check if it's plugged in \n3. Turn the computer on and enter BIOS \n4. Smell the Computer \n5. Hit the Computer \n6. Leave Computer\n");
+
+        }
+
+        public void printTaskMenu()
+        {
+            
+            Console.WriteLine("1.Process \n2.Performance \n3.Start Up \n4.Quit \n");
+        }
+
+        public double checkPerform()
+        {
+            return this.performance = (this.process + this.startUp) + 10;
         }
     }
 }
