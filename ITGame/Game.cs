@@ -122,7 +122,7 @@ namespace ITGame
                     case "help":
                         readFile("Verbs");
                         break;
-                    case "go to pc":
+                    case "solve":
                         if(curRoom.getPC() != null && curRoom.getRoomSolved() == false)
                         {
                             //Add functions for other rooms
@@ -141,23 +141,25 @@ namespace ITGame
                             }
                             else if (curRoom.getPC().getPCName().Equals("westRoomPC"))
                             {
-                                
-                                if (curRoom.getPC().getPCName().Equals("westRoomPC"))
+                                if (curRoom.getPC().initPCRoomWest())
                                 {
-                                    if (curRoom.getPC().initPCRoomWest())
-                                    {
-                                        curRoom.setRoomSolved();
-                                    }
-                                    else
-                                    {
-                                        continue;
-                                    }
-
+                                    curRoom.setRoomSolved();
+                                }
+                                else
+                                {
+                                    continue;
                                 }
                             }
                             else if (curRoom.getPC().getPCName().Equals("northRoomPC"))
                             {
-                                curRoom.getPC().initPCRoomNorth();
+                               if(curRoom.getPC().initPCRoomNorth())
+                                {
+                                    curRoom.setRoomSolved();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                             else
                             {
@@ -180,12 +182,25 @@ namespace ITGame
                         map.getNorthRoom().unlockRoom();
                         Console.WriteLine("North Unlocked");
                         break;
+                    case "fixall":
+                        map.getNorthRoom().setRoomSolved();
+                        map.getWestRoom().setRoomSolved();
+                        map.getEastRoom().setRoomSolved();
+                        Console.WriteLine("Everything is fixed");
+                        break;
+                    case "state":
+                        map.printState();
+                        break;
                     default:
                         Console.WriteLine($"The command {playerChoice} was not recognized\n");
                         Console.WriteLine("Type 'help' or 'h' for a list of commands");
                         break;
                 }
                 bool solvedEW = map.checkMap();
+                if (map.getNorthRoom().getRoomSolved() == true)
+                {
+                    running = false;
+                }
                 if (solvedEW && count < 1)
                 {
                     count++;
@@ -197,7 +212,15 @@ namespace ITGame
                     continue;
                 }
             }
+            finalLoop();
+        }
 
+
+        public void finalLoop()
+        {
+            Console.WriteLine("Congraduations this is the end of the game.");
+            Console.WriteLine("You go to leave Steven's computer but his crappy code magically appears on the screen\n");
+            Console.ReadLine();
         }
 
 

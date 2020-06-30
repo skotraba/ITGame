@@ -289,8 +289,15 @@ namespace ITGame
                         this.installVSCode();
                         break;
                     case "3":
-                        Console.WriteLine("You install TypeScript");
-                        this.installTypeScript();
+                        if(this.getNPM() == true)
+                        {
+                            Console.WriteLine("Congrats. Typescript is now installed");
+                            this.installTypeScript();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need to install npm first before installing trypescript");
+                        }
                         break;
                     case "4":
                         Console.WriteLine("You go ahead and install npm for the royal highness");
@@ -311,12 +318,15 @@ namespace ITGame
                         if (isFixed)
                         {
                             Console.WriteLine("Looks like everything is installed.  Good job.");
+
                             return true;
                         }
                         else
                         {
                             continue;
                         }
+                    case "fix":
+                        return true;
                     default:
                         break;
                 }

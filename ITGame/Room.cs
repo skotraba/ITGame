@@ -143,6 +143,7 @@ namespace ITGame
             Console.WriteLine($"This room status: {this.isSolved}");
             Console.WriteLine($"This room locked: {this.isLocked}");
             
+            
 
         }
 

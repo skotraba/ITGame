@@ -67,11 +67,19 @@ namespace ITGame
             return northRoom;
         }
 
+        public void printState()
+        {
+            Console.WriteLine($"West complete: {this.getWestRoom().getRoomSolved()}");
+            Console.WriteLine($"East complete: {this.getEastRoom().getRoomSolved()}");
+            Console.WriteLine($"North complete: {this.getNorthRoom().getRoomSolved()}");
+        }
+
         
         //Check the state of the Map to unlock North Room
         public bool checkMap()
         {
-            if (eastRoom.getRoomSolved() && westRoom.getRoomSolved() == true)
+           
+            if (eastRoom.getRoomSolved() == true && westRoom.getRoomSolved())
             {
                 return true;
             }
@@ -80,6 +88,8 @@ namespace ITGame
                 return false;
             }
         }
+
+        
 
     }
 }

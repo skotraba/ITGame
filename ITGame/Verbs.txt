@@ -5,6 +5,6 @@ left - Move to the left
 right - Move to the right
 up - Move up
 down - Move down
-go to pc - Go to a Pc in the room if available
+solve - Go to a Pc in the room if available
 yell - You can yell
 exit - Exit the game I guess
