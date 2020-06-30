@@ -120,7 +120,7 @@ namespace ITGame
             }
             else
             {
-                Console.WriteLine("Alright, I'll turn it on for you.  Looks like the computer is fixed. Let's move on.");
+                Console.WriteLine("Alright, I'll turn it on for you.  Looks like the computer is fixed. Let's move on. \n");
             }
             return true; 
 
@@ -173,7 +173,7 @@ namespace ITGame
                         Console.WriteLine($"Process is {this.process}");
                         return true;
                     case "5":
-                        Console.WriteLine($"The computer CPU is running at {this.process}%");
+                        Console.WriteLine($"The computer CPU is running at {this.checkPerform()}%");
                         if (this.process <= 20)
                         {
                             Console.WriteLine("Good job.  The computer seems to be running more effectively.  Let's leave this room.");
@@ -183,7 +183,7 @@ namespace ITGame
                         else
                         {
                             Console.WriteLine("You should try so more troubleshooting things...It's still real slow. ");
-                            printTaskMenu();
+                            printMenuWest();
                         }
                         break;
                     default:
@@ -267,11 +267,11 @@ namespace ITGame
         //North Room Final PC problem
         public bool initPCRoomNorth()
         {
-            Console.WriteLine("You intiate the north room PC problem\n\n");
+            Console.WriteLine("You initiate the north room PC problem\n\n");
             bool isFixed = false;
             Console.WriteLine("You approach the final computer in the game.  Unlike any problem you have seen before.");
             Console.WriteLine("Fix this issue and you can go home and eat pizza.\n");
-            Console.WriteLine("The computer belongs to Steven. A self proclaimed developer.  He needs you to do everything for him so he can maybe do his job.\n");
+            Console.WriteLine("The computer belongs to Steven. A self proclaimed developer.  \nHe needs you to do everything for him so he can maybe do his job.\n");
             Console.WriteLine("At first glance, you see dandruff all over the PC.\n");
             Console.WriteLine("Set up his computer and get out of here.\n");
 
@@ -310,10 +310,14 @@ namespace ITGame
                         Console.WriteLine("You leave the computer");
                         return false;
                     case "7":
-                        Console.WriteLine("Checking that everything is installed...");
+                        Console.WriteLine("Checking that everything is installed...\n");
+                        System.Threading.Thread.Sleep(2000);
                         Console.WriteLine($"VSCode... {this.VSCode}\n");
+                        System.Threading.Thread.Sleep(2000);
                         Console.WriteLine($"TypeScript... {this.typeScript}\n");
+                        System.Threading.Thread.Sleep(2000);
                         Console.WriteLine($"NPM... {this.npm}\n");
+                        System.Threading.Thread.Sleep(2000);
                         isFixed = this.checkInstalls();
                         if (isFixed)
                         {

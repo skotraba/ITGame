@@ -212,7 +212,16 @@ namespace ITGame
                     continue;
                 }
             }
-            printFinal();
+
+            if(map.checkMap() == true && map.getNorthRoom().getRoomSolved() == true)
+            {
+                printFinal();
+            }
+            else
+            {
+                Console.WriteLine("Quit");
+            }
+            
         }
 
 
@@ -234,7 +243,7 @@ namespace ITGame
             System.Threading.Thread.Sleep(3000);
             Console.WriteLine("His boss saw what you did and offers you a job\n");
             System.Threading.Thread.Sleep(2000);
-            Console.WriteLine($"Congrats {player.getName()} you've become a developer.\n\n\n");
+            Console.WriteLine($"Congrats {player.getName()}!\nYou have become a developer.\n\n\n");
             Console.WriteLine("**End of IT Simulator**");
             Console.ReadLine();
         }
