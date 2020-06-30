@@ -186,7 +186,7 @@ namespace ITGame
                         map.getNorthRoom().setRoomSolved();
                         map.getWestRoom().setRoomSolved();
                         map.getEastRoom().setRoomSolved();
-                        Console.WriteLine("Everything is fixed");
+                        Console.WriteLine("Everything is fixed\n");
                         break;
                     case "state":
                         map.printState();
@@ -212,14 +212,30 @@ namespace ITGame
                     continue;
                 }
             }
-            finalLoop();
+            printFinal();
         }
 
 
-        public void finalLoop()
+        public void printFinal()
         {
-            Console.WriteLine("Congraduations this is the end of the game.");
+
+            Console.WriteLine("\n\n\n");
+            Console.WriteLine("Press enter to leave computer...");
+            Console.ReadLine();
             Console.WriteLine("You go to leave Steven's computer but his crappy code magically appears on the screen\n");
+            System.Threading.Thread.Sleep(3000);
+            Console.WriteLine("You sit down and change a few lines. No one will know...\n");
+            for(int i = 0; i < 3; i++)
+            {
+                System.Threading.Thread.Sleep(2000);
+                Console.WriteLine("...\n");
+            }
+            Console.WriteLine("Few lines of code later...\n");
+            System.Threading.Thread.Sleep(3000);
+            Console.WriteLine("His boss saw what you did and offers you a job\n");
+            System.Threading.Thread.Sleep(2000);
+            Console.WriteLine($"Congrats {player.getName()} you've become a developer.\n\n\n");
+            Console.WriteLine("**End of IT Simulator**");
             Console.ReadLine();
         }
 
